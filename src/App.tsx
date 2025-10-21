@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Select } from "./Select";
+import { Select, type SelectOption } from "./Select";
 
 const options = [
   {label: 'First', value: 1},
@@ -10,9 +10,16 @@ const options = [
 ]
 
 function App() {
-  const [value, setValue] = useState<typeof options[0] | undefined>(options[0])
+  const [value1, setValue1] = useState<SelectOption | undefined>(options[0])
+  const[value2, setValue2] = useState<SelectOption[]>([options[0]])
 
-  return <Select options={options} value={value} onChange={(o) => setValue(o) }/>
+  return(
+    <>
+      <Select options={options} value={value1} onChange={(o) => setValue1(o) }/>
+      <br></br>
+      <Select multiple value={value2} options={options} onChange={(o) => setValue2(o)}/>
+    </>
+  )
 }
 
 export default App
